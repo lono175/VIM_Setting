@@ -1,0 +1,1 @@
+delimitMate.vba: call delete('C:\Users\Lono\vimfiles/plugin/delimitMate.vim')|call delete('C:\Users\Lono\vimfiles/autoload/delimitMate.vim')|call delete('C:\Users\Lono\vimfiles/doc/delimitMate.txt')

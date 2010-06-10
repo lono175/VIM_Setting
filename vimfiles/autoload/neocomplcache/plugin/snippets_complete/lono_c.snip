@@ -1,0 +1,132 @@
+snippet once
+    #pragma once
+snippet Inc
+    #include <${1:iostream}>${0}
+# #include "..."
+snippet inc
+    #include "${1:`Filename()`}.h"${0}
+snippet tpl
+	template< typename ${1}>${2}
+snippet vec
+	vector<${1:unsigned char}> ${2}
+snippet svec
+	std::vector<${1:unsigned char}> ${2}
+# std::map
+snippet map
+	map<${1:key}, ${2:value}> ${3};
+snippet pair
+	pair<${1:key}, ${2:value}> ${3};
+# std::vector
+snippet vector
+	vector<${1:char}> ${2};
+# Namespace
+snippet ns
+	namespace ${1:} {
+		${2}
+	} /* $1 */
+# Class
+snippet cl
+	class ${1:`Filename()`} {
+	public:
+		$1 (${2});
+		virtual ~$1 ();
+
+	private:
+		${3:/* data */}
+	};
+snippet fori
+	for (int i = 0; i < ${1:count}; i++) {
+		${2}
+	}
+snippet forj
+	for (int j = 0; j < ${1:count}; j++) {
+		${2}
+	}
+#snippet for
+#	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+#		${4}
+#	}
+# Custom For Loop
+snippet forr
+	for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
+		${5:}
+	}
+# If Condition
+snippet if
+	if (${1:/* condition */}) {
+		${2:}
+	}
+snippet el
+	else {
+		${1}
+	}
+# Tertiary conditional
+snippet te
+	${1:/* condition */} ? ${2:a} : ${3:b}
+# Do While Loop
+snippet do
+	do {
+		${2:}
+	} while (${1:/* condition */});
+# While Loop
+snippet wh
+	while (${1:/* condition */}) {
+		${2:}
+	}
+# Function
+snippet fun
+	${1:void} ${2:function_name}(${3})
+	{
+		${4:}
+	}
+# Typedef
+snippet td
+	typedef ${1:int} ${2:MyCustomType};${3}
+# Function Declaration
+snippet fund
+	${1:void} ${2:function_name}(${3});${4}
+
+snippet a
+	assert(${1});
+snippet usi
+	using namespace ${1};
+snippet us
+	using ${1};
+snippet nn
+	!= NULL${1}
+snippet ne
+	!= ${1}
+snippet e
+	== ${1}
+snippet or
+	|| ${1}
+snippet and
+	&& ${1}
+snippet t
+	true${1}
+snippet f
+	false${1}
+snippet n
+	NULL${1}
+snippet p
+	cv::Point${1}
+snippet vp
+	std::vector<cv::Point>${1}
+snippet r
+	return ${1};
+snippet {
+	{
+ 		${1}
+ 	}
+# snippet {
+#  	{
+#  		${1}
+#  	}
+# snippet [
+# 	[$1] 
+snippet ut
+	#include <boost/test/unit_test.hpp>
+	BOOST_AUTO_TEST_CASE( ${1:`toupper(Filename())`}_TEST )
+	{
+		${2}
+	}
