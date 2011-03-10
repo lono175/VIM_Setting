@@ -283,7 +283,7 @@ language messages zh_TW.utf-8
 "------------------------------unicode support---------------------------------------
 
 "------------------------------delimitMate---------------------------------------
-au FileType cpp let b:delimitMate_matchpairs = "(:),[:],<:>"
+au FileType cpp let b:delimitMate_matchpairs = "(:),[:]"
 
 "------------------------------neocomplcache---------------------------------------
 
