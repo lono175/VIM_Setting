@@ -16,6 +16,7 @@ set foldnestmax=3 "set fold level to 3 at max
 "open all folds
 set foldlevelstart=99
 "set isfname+=32 "Vim to support filenames with spaces in when using gf, may break things
+"
 "To avoid getting the "Press ENTER" message whenever I open a file
 set cmdheight=2
 set tabstop=4  "tab stop for 4 spaces 
@@ -23,12 +24,14 @@ set shiftwidth=4
 set expandtab "transform all tabs into spaces
 "go to command mode
 imap jj <Esc>
+
 "set confirm  "show confirm dialogs when there are errors 
 "Disable the backup file
 "set nobackup 
 "Disable swapfile, put everything in memory(will crash vim with big file)
 "set noswapfile
 " turn off annoying bell
+
 set vb
 " smartindent automatically inserts one extra level of indentation in some cases.
 set smartindent
@@ -185,7 +188,7 @@ let g:EnhCommentifyRespectIndent = 'Yes'
 let g:EnhCommentifyBindInInsert='No'
 let g:EnhCommentifyFirstLineMode = 'Yes'
 
-let g:visual_studio_quickfix_height = 10
+"let g:visual_studio_quickfix_height = 10
 "map <C-/> <Plug>VisualTraditional
 "map <C-h> <Plug>VisualTraditional
 
@@ -307,10 +310,9 @@ endif
 let g:neocomplcache_keyword_patterns['default'] = '\h\w*'
 
 " snippets expand key
-imap  <silent><expr><TAB>  neocomplcache#plugin#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<C-e>" : "\<TAB>")
-"imap  <silent><expr><TAB>  neocomplcache#plugin#snippets_complete#expandable() ? "\<Plug>(neocomplcache_snippets_expand)" : "\<C-e>"
-smap  <TAB>  <RIGHT><Plug>(neocomplcache_snippets_jump)
-inoremap <expr><C-e>     neocomplcache#complete_common_string()
+imap  <silent><expr><tab>  neocomplcache#sources#snippets_complete#expandable() ? "\<plug>(neocomplcache_snippets_expand)" : (pumvisible() ? "\<c-e>" : "\<tab>")
+smap  <tab>  <right><plug>(neocomplcache_snippets_jump)
+inoremap <expr><c-e>     neocomplcache#complete_common_string()
 
 " function for snippets
 function Filename()
