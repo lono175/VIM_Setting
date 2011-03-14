@@ -44,8 +44,10 @@ snippet pro
 # Lambda
 snippet ld
 	${1:var} = lambda ${2:vars} : ${3:action}
-snippet .
+snippet s
 	self.
+#snippet .
+#	self.
 #snippet try
 #abbr    Try/Except
 #	try:
@@ -93,10 +95,8 @@ snippet ne
 snippet e
 	== ${1}
 snippet t
-prev_word   'a'
 	True${1}
 snippet f
-prev_word   '^'
 	False${1}
 snippet p
 	print ${1}
