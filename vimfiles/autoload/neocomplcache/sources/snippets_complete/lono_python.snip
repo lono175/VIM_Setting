@@ -1,7 +1,7 @@
 snippet #!
 	#!/usr/bin/python
 
-snippet imp
+snippet im
 	import ${1:module}
 # Module Docstring
 snippet docs
@@ -100,3 +100,10 @@ snippet f
 	False${1}
 snippet p
 	print ${1}
+snippet r
+    return ${1}
+snippet     fore
+prev_word   '^'
+	for ${1:i}, ${2:value} in enumerate(${3:list}):
+		${4:pass}
+
