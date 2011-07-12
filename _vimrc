@@ -107,7 +107,7 @@ nnoremap <silent> <C-s> :wa<CR>
 
 "find the occurence in all files
 "nnoremap <Leader>f :noautocmd vimgrep/\<<C-r><C-w>\>/j **/*.[ch] **/*.[ch]pp **/*.java **/*.pl **/*.rb **/*.py **/*.cs<CR>:cw<CR>
-nnoremap <Leader>F :noautocmd vimgrep/\c/j **/*.[ch] **/*.[ch]pp **/*.java **/*.pl **/*.rb **/*.py **/*.cs **/*.m <left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
+nnoremap <Leader>F :noautocmd vimgrep/\c/j **/*.[ch] **/*.[ch]pp **/*.tex **/*.java **/*.pl **/*.rb **/*.py **/*.cs **/*.m <left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left><left>
 
 "Keystroke Savor for Substituting all occurrences of the word under the cursor
 "without question
