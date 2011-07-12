@@ -1,0 +1,1 @@
+put all files into %windir%
