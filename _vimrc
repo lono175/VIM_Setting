@@ -38,6 +38,13 @@ set smartindent
 " Don't let swap and backup files fill my working directory.
 set backupdir=c:\\temp,.        " Backup files
 set directory=c:\\temp,.        " Swap files
+
+"persistent undo for VIM 7.3 or above
+set undodir=c:\\temp,.
+set undofile
+set undolevels=1000 "maximum number of changes that can be undone
+set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+
 set scrolloff=5                 " keep at least 5 lines around the cursor
 set autoread                    " Reload the file when it has been modified
 set wildmenu                    " Enable menu for file as below
@@ -91,17 +98,22 @@ let g:fuf_keyOpenTabpage = '<CR>'
 "for ctag.vim
 "c-tag remap, jump to previous tag
 noremap <C-[> <C-t> 
-"C-\ - Open the definition in a new tab
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
-"A-] - Open the definition in a vertical split
-map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+"C-\ - Open the definition in a new tab, never use it
+"map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+"A-] - Open the definition in a vertical split, never use it
+"map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 
 "tabbed editing, not working
 "map <C-t> <Esc>:tabnew<CR> 
 
 "save all files
 inoremap <silent> <C-s> <ESC>:wa<CR> 
-nnoremap <silent> <C-s> :wa<CR> 
+nnoremap <silent> <C-s> :wa<CR>
+
+"save all files and rebuild tag file
+"need Sleep function to wait cs.py to rebuild cscope.out
+au FileType cpp,python,c,java inoremap <silent> <C-s> <ESC> :wa<CR>:cs kill 0<CR>:!start cmd /c  cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
+au FileType cpp,python,c,java nnoremap <silent> <C-s> :wa<CR>:cs kill 0<CR>:!start cmd /c cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
 
 
 
@@ -280,8 +292,8 @@ set ambiwidth=double
 "since now vim internal coding is UTF8, we need to delete original menu and
 "apply new coding of menu(utf-8). Otherwise, the menu cannot display
 "correctly. It set menu to CHINESE!!!
-source $VIMRUNTIME/delmenu.vim
-language messages zh_TW.utf-8
+"source $VIMRUNTIME/delmenu.vim
+"language messages zh_TW.utf-8
 
 "------------------------------unicode support---------------------------------------
 
@@ -328,6 +340,30 @@ endfunction
 "------------------------------neocomplcache---------------------------------------
 
 
+"------------------------------cscope---------------------------------------
+if has("cscope")
+  nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+  nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+  nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+  if filereadable("cscope.out")
+      cs add cscope.out
+  endif
+endif
+
+
+
+"find all functions calling a certain function, usefull!!
+map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+
+"to find all occurrences of a particular C symbol
+map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+"------------------------------cscope---------------------------------------
+
 
 set diffexpr=MyDiff()
 function MyDiff()
@@ -367,3 +403,16 @@ set path+=D:/OpenCV/include/opencv
 set path+=D:/boost/boost_1_42
 
 "set tags+=D:\ctags57\boost-tags
+
+
+
+"a sleep function which allows vim to wait for the other processes to finish
+com! -complete=command -nargs=+ Sleep call s:Sleep(<q-args>)
+fun! s:Sleep(millisec)
+  let ct = localtime()
+  let dt = 0
+  while dt < (a:millisec/1000)
+    let dt = localtime() - ct
+  endwhile
+endfun
+
