@@ -112,8 +112,15 @@ nnoremap <silent> <C-s> :wa<CR>
 
 "save all files and rebuild tag file
 "need Sleep function to wait cs.py to rebuild cscope.out
-au FileType cpp,python,c,java inoremap <silent> <C-s> <ESC> :wa<CR>:cs kill 0<CR>:!start cmd /c  cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
-au FileType cpp,python,c,java nnoremap <silent> <C-s> :wa<CR>:cs kill 0<CR>:!start cmd /c cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
+au FileType cpp,c,java inoremap <silent> <C-s> <ESC> :wa<CR>:cs kill 0<CR>:!start cmd /c  cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
+au FileType cpp,c,java nnoremap <silent> <C-s> :wa<CR>:cs kill 0<CR>:!start cmd /c cs.py<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
+
+"disable cscope for python
+au FileType python set nocst
+
+"save all files for python, and rebuild tag file with ctags (TODO: switch to GNU Global when it supports python)
+au FileType python inoremap <silent> <C-s> <ESC> :wa<CR>:cs kill 0<CR>:!start cmd /c  cs.py<CR>:!start cmd /c ctags -R --python-kinds=-i .<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
+au FileType python nnoremap <silent> <C-s> :wa<CR>:cs kill 0<CR>:!start cmd /c cs.py<CR>:!start cmd /c ctags -R --python-kinds=-i .<CR>:Sleep 1000<CR>:cs add cscope.out<CR>
 
 
 
@@ -342,6 +349,7 @@ endfunction
 
 "------------------------------cscope---------------------------------------
 if has("cscope")
+
   nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
   nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
   nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
@@ -353,15 +361,16 @@ if has("cscope")
   if filereadable("cscope.out")
       cs add cscope.out
   endif
+  "find all functions calling a certain function, usefull!!
+  map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
+
+  "to find all occurrences of a particular C symbol
+  map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
+
 endif
 
 
 
-"find all functions calling a certain function, usefull!!
-map g<C-]> :cs find 3 <C-R>=expand("<cword>")<CR><CR>
-
-"to find all occurrences of a particular C symbol
-map g<C-\> :cs find 0 <C-R>=expand("<cword>")<CR><CR>
 "------------------------------cscope---------------------------------------
 
 
@@ -409,10 +418,10 @@ set path+=D:/boost/boost_1_42
 "a sleep function which allows vim to wait for the other processes to finish
 com! -complete=command -nargs=+ Sleep call s:Sleep(<q-args>)
 fun! s:Sleep(millisec)
-  let ct = localtime()
-  let dt = 0
-  while dt < (a:millisec/1000)
-    let dt = localtime() - ct
-  endwhile
+    let ct = localtime()
+    let dt = 0
+    while dt < (a:millisec/1000)
+        let dt = localtime() - ct
+    endwhile
 endfun
 
