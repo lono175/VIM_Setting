@@ -1,13 +1,15 @@
+include lono_c.snip
+
 snippet sel
     @selector(${1:method}:)
 
 
-snippet imp
+snippet Imp
     #import <${1:Cocoa/Cocoa.h}>
 
 
-snippet Imp
-    #import "${1}}"
+snippet imp
+    #import "${1}"
 
 
 snippet log
@@ -84,16 +86,27 @@ snippet bez
 	NSBezierPath *${1:path} = [NSBezierPath bezierPath];
 	${0}
     
-
 snippet m
 abbr Method
-	- (${1:id})${2:method}${3:(id)}${4:anArgument}
+	- (${1:void})${2:method}
 	{
-    	${0}
-		return nil;
+    	${3}
 	}
     
+snippet m1
+abbr Method
+	- (${1:void})${2:method}: (${3:type}) ${4:arg}
+	{
+    	${5}
+	}
 
+snippet m2
+abbr Method
+	- (${1:void})${2:method}: (${3:type}) ${4:arg}
+                 ${5:method}: (${6:type}) ${7:arg}
+	{
+    	${8}
+	}
 snippet M
 abbr Method
     - (${1:id})${2:method}${3:(id)}${4:anArgument};

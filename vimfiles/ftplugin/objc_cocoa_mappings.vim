@@ -28,7 +28,7 @@ com! -buffer -nargs=? Alternate call <SID>AlternateFile()
 let objc_man_key = exists('objc_man_key') ? objc_man_key : 'K'
 exe 'nn <buffer> <silent> '.objc_man_key.' :<c-u>call objc#man#ShowDoc()<cr>'
 
-nn <buffer> <silent> <leader>t :cal<SID>AlternateFile()<cr>
+nn <buffer> <silent> <leader>A :cal<SID>AlternateFile()<cr>
 
 " Mimic some of Xcode's mappings.
 nn <buffer> <silent> <d-r> :w<bar>cal<SID>BuildAnd('launch')<cr>
@@ -61,7 +61,7 @@ endf
 fun s:ReadableExtensionIn(path, extensions)
 	for ext in a:extensions
 		if filereadable(a:path.ext)
-			exe 'e '.fnameescape(a:path.ext)
+			exe 'e'.fnameescape(a:path.ext)
 			return 1
 		endif
 	endfor

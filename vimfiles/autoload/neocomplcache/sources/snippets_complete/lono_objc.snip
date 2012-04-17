@@ -1,0 +1,84 @@
+snippet a
+    NSAssert( ${1}, "${2:something wrong}");
+
+snippet b
+    BOOL${1}
+
+snippet nn
+	!= nil${1}
+
+snippet ne
+	!= ${1}
+
+snippet e
+	== ${1}
+
+snippet or
+	|| ${1}
+
+snippet and
+	&& ${1}
+
+snippet t
+	YES${1}
+
+snippet f
+	NO${1}
+
+snippet n
+	nil${1}
+
+snippet r
+	return ${1};
+    
+snippet {
+	{
+ 		${1}
+ 	}
+
+snippet fori
+	for (int i = 0; i < ${1:count}; i++) {
+		${2}
+	}
+
+snippet forj
+	for (int j = 0; j < ${1:count}; j++) {
+		${2}
+	}
+
+snippet for
+	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+		${4}
+	}
+# Custom For Loop
+snippet forr
+	for (${1:i} = ${2:0}; ${3:$1 < 10}; $1${4:++}) {
+		${5:}
+	}
+
+# If Condition
+snippet if
+	if (${1:/* condition */}) {
+		${2:}
+	}
+
+snippet el
+	else {
+		${1}
+	}
+
+# Tertiary conditional
+snippet te
+	${1:/* condition */} ? ${2:a} : ${3:b}
+
+# Do While Loop
+snippet do
+	do {
+		${2:}
+	} while (${1:/* condition */});
+
+# While Loop
+snippet wh
+	while (${1:/* condition */}) {
+		${2:}
+	}
